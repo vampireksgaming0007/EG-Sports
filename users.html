@@ -1,8 +1,8 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Registered Users</title>
+  <title>Registered Players</title>
   <style>
     body {
       background: #000;
@@ -15,6 +15,7 @@
     h2 {
       color: #00ffff;
       text-shadow: 0 0 10px #00ffff;
+      margin-bottom: 20px;
     }
 
     ul {
@@ -51,34 +52,63 @@
       color: #000;
       box-shadow: 0 0 20px #00ffff;
     }
+
+    .topbar {
+      margin-bottom: 30px;
+    }
+
+    .welcome {
+      color: #00ffff;
+      font-weight: 600;
+      font-size: 18px;
+      text-shadow: 0 0 10px #00ffff;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
+
+  <div class="topbar">
+    <div class="welcome" id="welcomeUser"></div>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
   <h2>Registered Players</h2>
   <ul id="userList"></ul>
-  <button id="logoutBtn">Logout</button>
 
   <script>
-    // Load users from localStorage
+    // --- Check if user is logged in ---
+    const currentUser = localStorage.getItem("loggedInUser");
+    if (!currentUser) {
+      alert("You must log in first!");
+      window.location.href = "login.html"; // redirect to login page
+    }
+
+    // --- Welcome message ---
+    document.getElementById("welcomeUser").textContent = `👋 Welcome, ${currentUser}!`;
+
+    // --- Load users from localStorage ---
     const users = JSON.parse(localStorage.getItem("users")) || [];
     const list = document.getElementById("userList");
 
-    // Show only usernames
     if (users.length === 0) {
       list.innerHTML = "<li>No users registered yet.</li>";
     } else {
       users.forEach(u => {
-        const li = document.createElement("li");
-        li.textContent = `👤 ${u.username}`;
-        list.appendChild(li);
+        // Ensure username exists
+        if(u.username) {
+          const li = document.createElement("li");
+          li.textContent = `👤 ${u.username}`;
+          list.appendChild(li);
+        }
       });
     }
 
-    // Logout button: clears login data
+    // --- Logout button ---
     document.getElementById("logoutBtn").addEventListener("click", () => {
       localStorage.removeItem("loggedInUser");
       alert("You have been logged out!");
-      window.location.href = "index.html"; // Redirect to home
+      window.location.href = "login.html"; // go back to login
     });
   </script>
 </body>
