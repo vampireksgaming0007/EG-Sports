@@ -69,22 +69,29 @@
   </div>
 
   <script>
-    const form = document.getElementById("registerForm");
-    const msg = document.getElementById("message");
+const form = document.getElementById("registerForm");
+const msg = document.getElementById("message");
 
-    form.addEventListener("submit", function(e){
-      e.preventDefault();
-      const username = document.getElementById("username").value;
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  const username = document.getElementById("username").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-      // save data in local storage (temporary)
-      const user = { username, email, password };
-      localStorage.setItem("userData", JSON.stringify(user));
+  // Get existing users from localStorage or empty array
+  let users = JSON.parse(localStorage.getItem("users")) || [];
 
-      msg.innerHTML = "✅ Registration Successful!";
-      form.reset();
-    });
-  </script>
+  // Add new user
+  users.push({ username, email, password });
+
+  // Save back to localStorage
+  localStorage.setItem("users", JSON.stringify(users));
+
+  msg.innerHTML = "✅ Registration Successful!";
+  form.reset();
+});
+</script>
+  
 </body>
 </html>
+
