@@ -1,77 +1,135 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Registered Players</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registered Users | EG SPORTS</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
-      background: #000;
-      color: #fff;
-      font-family: 'Poppins', sans-serif;
-      padding: 30px;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle at top, #000, #0B0C10);
+      color: white;
       text-align: center;
+      padding: 50px 0;
     }
 
     h1 {
-      color: #00ffff;
-      text-shadow: 0 0 20px #00ffff;
-      margin-bottom: 20px;
-    }
-
-    .player-count {
-      font-size: 60px;
-      color: #00ffff;
-      text-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff;
-      font-weight: 800;
+      text-shadow: 0 0 20px cyan;
+      font-size: 2.5rem;
       margin-bottom: 30px;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 20px;
+    table {
+      width: 60%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      border: 2px solid cyan;
+      box-shadow: 0 0 25px cyan;
+      border-radius: 15px;
+      overflow: hidden;
     }
 
-    li {
-      background: #0B0C10;
-      border: 1px solid #00ffff;
-      padding: 10px 20px;
-      margin: 10px auto;
-      width: 60%;
+    th, td {
+      padding: 12px;
+      border: 1px solid cyan;
+      font-size: 1rem;
+    }
+
+    th {
+      background: linear-gradient(90deg, #00FFFF, #0077FF);
+      color: black;
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    tr:hover {
+      background: rgba(0, 255, 255, 0.2);
+      transition: 0.3s;
+    }
+
+    .btn-back {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 25px;
+      background: cyan;
+      border-radius: 25px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      transition: 0.3s;
+      border: 2px solid cyan;
+    }
+
+    .btn-back:hover {
+      background: white;
+      color: black;
+      box-shadow: 0 0 15px cyan;
+      transform: scale(1.05);
+    }
+
+    #clearUsers {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 8px 20px;
+      background: red;
       border-radius: 10px;
-      box-shadow: 0 0 10px #00ffff;
-      font-size: 18px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    #clearUsers:hover {
+      background: darkred;
+      box-shadow: 0 0 15px red;
     }
   </style>
 </head>
 <body>
+  <h1>Registered Users</h1>
 
-  <h1>Registered Players</h1>
-  <div class="player-count" id="playerCount">0</div>
+  <table id="usersTable">
+    <thead>
+      <tr>
+        <th>Username</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-  <ul id="userList"></ul>
+  <button id="clearUsers">Clear All Users</button>
+  <br>
+  <a href="index.html" class="btn-back">Back to Home</a>
 
   <script>
-    // --- Load all registered users from localStorage ---
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const list = document.getElementById("userList");
-    const playerCount = document.getElementById("playerCount");
+    document.addEventListener("DOMContentLoaded", () => {
+      const tableBody = document.querySelector("#usersTable tbody");
+      const users = JSON.parse(localStorage.getItem("EGSPORTS_USERS")) || [];
 
-    // Show total number of players
-    playerCount.textContent = users.length;
+      if (users.length === 0) {
+        tableBody.innerHTML = "<tr><td>No users registered yet.</td></tr>";
+        return;
+      }
 
-    // Show usernames
-    if (users.length === 0) {
-      list.innerHTML = "<li>No users registered yet.</li>";
-    } else {
-      users.forEach(u => {
-        if (u.username) { // ensure username exists
-          const li = document.createElement("li");
-          li.textContent = `👤 ${u.username}`;
-          list.appendChild(li);
+      users.forEach(user => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${user.username}</td>`;
+        tableBody.appendChild(row);
+      });
+
+      document.getElementById("clearUsers").addEventListener("click", () => {
+        if (confirm("Are you sure you want to delete all users?")) {
+          localStorage.removeItem("EGSPORTS_USERS");
+          location.reload();
         }
       });
-    }
+    });
   </script>
 </body>
 </html>
