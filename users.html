@@ -12,10 +12,18 @@
       text-align: center;
     }
 
-    h2 {
+    h1 {
       color: #00ffff;
-      text-shadow: 0 0 10px #00ffff;
+      text-shadow: 0 0 20px #00ffff;
       margin-bottom: 20px;
+    }
+
+    .player-count {
+      font-size: 60px;
+      color: #00ffff;
+      text-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff;
+      font-weight: 800;
+      margin-bottom: 30px;
     }
 
     ul {
@@ -34,82 +42,36 @@
       box-shadow: 0 0 10px #00ffff;
       font-size: 18px;
     }
-
-    button {
-      background: none;
-      border: 2px solid #00ffff;
-      color: #00ffff;
-      padding: 10px 25px;
-      margin-top: 30px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #00ffff;
-      color: #000;
-      box-shadow: 0 0 20px #00ffff;
-    }
-
-    .topbar {
-      margin-bottom: 30px;
-    }
-
-    .welcome {
-      color: #00ffff;
-      font-weight: 600;
-      font-size: 18px;
-      text-shadow: 0 0 10px #00ffff;
-      margin-bottom: 10px;
-    }
   </style>
 </head>
 <body>
 
-  <div class="topbar">
-    <div class="welcome" id="welcomeUser"></div>
-    <button id="logoutBtn">Logout</button>
-  </div>
+  <h1>Registered Players</h1>
+  <div class="player-count" id="playerCount">0</div>
 
-  <h2>Registered Players</h2>
   <ul id="userList"></ul>
 
   <script>
-    // --- Check if user is logged in ---
-    const currentUser = localStorage.getItem("loggedInUser");
-    if (!currentUser) {
-      alert("You must log in first!");
-      window.location.href = "login.html"; // redirect to login page
-    }
-
-    // --- Welcome message ---
-    document.getElementById("welcomeUser").textContent = `👋 Welcome, ${currentUser}!`;
-
-    // --- Load users from localStorage ---
+    // --- Load all registered users from localStorage ---
     const users = JSON.parse(localStorage.getItem("users")) || [];
     const list = document.getElementById("userList");
+    const playerCount = document.getElementById("playerCount");
 
+    // Show total number of players
+    playerCount.textContent = users.length;
+
+    // Show usernames
     if (users.length === 0) {
       list.innerHTML = "<li>No users registered yet.</li>";
     } else {
       users.forEach(u => {
-        // Ensure username exists
-        if(u.username) {
+        if (u.username) { // ensure username exists
           const li = document.createElement("li");
           li.textContent = `👤 ${u.username}`;
           list.appendChild(li);
         }
       });
     }
-
-    // --- Logout button ---
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      localStorage.removeItem("loggedInUser");
-      alert("You have been logged out!");
-      window.location.href = "login.html"; // go back to login
-    });
   </script>
 </body>
 </html>
