@@ -29,13 +29,12 @@
   <div class="count-box" id="playerCount">0</div>
 
   <script>
-    // Make sure the DOM is loaded
     window.addEventListener('DOMContentLoaded', () => {
       const playerCount = document.getElementById("playerCount");
 
-      // Set custom count
-      const customCount = 100,000; // change this number as needed
-      playerCount.innerText = customCount + "+";
+      // Set custom count to 1 Lakh+
+      const customCount = 109823; 
+      playerCount.innerText = customCount.toLocaleString() + "+"; // formats as 1,00,000+
     });
   </script>
 </body>
