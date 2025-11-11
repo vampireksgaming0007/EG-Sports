@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Users List — EG Sports</title>
+  <title>Registered Players — EG Sports</title>
   <style>
     body { 
       background: #0B0C10; 
@@ -12,40 +12,24 @@
       text-align:center; 
       padding:50px;
     }
-    table { 
-      margin:auto; 
-      border-collapse: collapse; 
-      width:50%; 
-    }
-    th, td { 
-      border:1px solid #00FFFF; 
-      padding:10px; 
+    .count-box {
+      font-size: 50px;
+      border: 2px solid #00FFFF;
+      padding: 40px;
+      border-radius: 20px;
+      display: inline-block;
     }
   </style>
 </head>
 <body>
-  <h2>Registered Users</h2>
-  <table>
-    <thead>
-      <tr><th>Username</th></tr>
-    </thead>
-    <tbody id="usersTable"></tbody>
-  </table>
+  <h2>Number of Registered Players</h2>
+  <div class="count-box" id="playerCount">0</div>
 
- <script>
-const table = document.getElementById("usersTable");
-const users = JSON.parse(localStorage.getItem("users")) || [];
-
-if(users.length === 0){
-  table.innerHTML = "<tr><td>No users registered yet</td></tr>";
-} else {
-  users.forEach(user => {
-    const row = document.createElement("tr");
-    row.innerHTML = `<td>${user.username}</td>`;
-    table.appendChild(row);
-  });
-}
-</script>
+  <script>
+    // Get users from localStorage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    // Show number of users
+    document.getElementById("playerCount").innerText = users.length;
+  </script>
 </body>
 </html>
-
