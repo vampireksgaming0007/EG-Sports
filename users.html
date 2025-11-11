@@ -32,15 +32,20 @@
     <tbody id="usersTable"></tbody>
   </table>
 
-  <script>
-    const table = document.getElementById("usersTable");
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+ <script>
+const table = document.getElementById("usersTable");
+const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    users.forEach(user => {
-      const row = document.createElement("tr");
-      row.innerHTML = `<td>${user.username}</td>`;
-      table.appendChild(row);
-    });
-  </script>
+if(users.length === 0){
+  table.innerHTML = "<tr><td>No users registered yet</td></tr>";
+} else {
+  users.forEach(user => {
+    const row = document.createElement("tr");
+    row.innerHTML = `<td>${user.username}</td>`;
+    table.appendChild(row);
+  });
+}
+</script>
 </body>
 </html>
+
