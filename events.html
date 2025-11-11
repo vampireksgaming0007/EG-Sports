@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EG Sports Upcoming Events</title>
+  <style>
+    body {
+      background: radial-gradient(circle at top, #0b0b1d, #000);
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 40px 0;
+      color: #00ffff;
+      text-shadow: 0 0 20px #00ffff;
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .event-grid img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    }
+
+    .event-grid img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 20px;
+      color: #aaa;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 EG Sports Upcoming Events 🎮</h1>
+
+  <div class="event-grid">
+    <!-- Event Images -->
+    <img src="images/event/event-1.png" alt="Event 1">
+    <img src="images/event/event-2.png" alt="Event 2">
+    <img src="images/event/event-3.png" alt="Event 3">
+    <img src="images/event/event-4.png" alt="Event 4">
+    <img src="images/event/event-5.png" alt="Event 5">
+    <!-- Add more events by copying the line above -->
+  </div>
+
+  <footer>
+    © 2025 EG Sports | Designed by Khushkaran Singh Sekhon
+  </footer>
+</body>
+</html>

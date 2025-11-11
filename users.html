@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Registered Users</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      background: #0B0C10;
+      border: 1px solid #00ffff;
+      padding: 10px 20px;
+      margin: 10px auto;
+      width: 60%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffff;
+      font-size: 18px;
+    }
+
+    button {
+      background: none;
+      border: 2px solid #00ffff;
+      color: #00ffff;
+      padding: 10px 25px;
+      margin-top: 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #00ffff;
+      color: #000;
+      box-shadow: 0 0 20px #00ffff;
+    }
+  </style>
+</head>
+<body>
+  <h2>Registered Players</h2>
+  <ul id="userList"></ul>
+  <button id="logoutBtn">Logout</button>
+
+  <script>
+    // Load users from localStorage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const list = document.getElementById("userList");
+
+    // Show only usernames
+    if (users.length === 0) {
+      list.innerHTML = "<li>No users registered yet.</li>";
+    } else {
+      users.forEach(u => {
+        const li = document.createElement("li");
+        li.textContent = `👤 ${u.username}`;
+        list.appendChild(li);
+      });
+    }
+
+    // Logout button: clears login data
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("loggedInUser");
+      alert("You have been logged out!");
+      window.location.href = "index.html"; // Redirect to home
+    });
+  </script>
+</body>
+</html>
