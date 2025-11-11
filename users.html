@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registered Players — EG Sports</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body { 
+      background: #0B0C10; 
+      color: #00FFFF; 
+      font-family: 'Poppins', sans-serif; 
+      text-align:center; 
+      padding:50px;
+    }
+    h2 { font-family: 'Orbitron', sans-serif; margin-bottom: 30px; }
+    .count-box {
+      font-size: 60px;
+      border: 3px solid #00FFFF;
+      padding: 50px;
+      border-radius: 25px;
+      display: inline-block;
+      box-shadow: 0 0 30px #00FFFF, 0 0 60px #00FFFF;
+    }
+  </style>
+</head>
+<body>
+  <h2>Number of Registered Players</h2>
+  <div class="count-box" id="playerCount">0</div>
+
+  <script>
+    // Make sure the DOM is loaded
+    window.addEventListener('DOMContentLoaded', () => {
+      const playerCount = document.getElementById("playerCount");
+
+      // Set custom count
+      const customCount = 1999; // change this number as needed
+      playerCount.innerText = customCount + "+";
+    });
+  </script>
+</body>
+</html>
